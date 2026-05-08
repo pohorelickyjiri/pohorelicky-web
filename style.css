@@ -7,7 +7,7 @@
 :root {
   --bg: #0a0a0f;
   --text: #f0ece4;
-  --muted: #6b6560;
+  --muted: #7a7570;
   --accent: #c8a97e;
 }
 
@@ -32,58 +32,73 @@ body {
   inset: 0;
   overflow: hidden;
   z-index: 0;
-  filter: blur(80px);
+  filter: blur(120px);
 }
 
 .blob {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.25;
+  opacity: 0.45;
 }
 
 .blob-1 {
-  width: 600px;
-  height: 600px;
+  width: 800px;
+  height: 800px;
   background: #1a1a5e;
-  top: -10%;
-  left: -10%;
+  top: -20%;
+  left: -15%;
   animation: move1 18s ease-in-out infinite alternate;
 }
 
 .blob-2 {
-  width: 500px;
-  height: 500px;
-  background: #1a3a20;
-  bottom: -10%;
-  right: -5%;
+  width: 700px;
+  height: 700px;
+  background: #0f2e18;
+  bottom: -20%;
+  right: -10%;
   animation: move2 22s ease-in-out infinite alternate;
 }
 
 .blob-3 {
+  width: 550px;
+  height: 550px;
+  background: #3a1025;
+  top: 35%;
+  left: 35%;
+  animation: move3 16s ease-in-out infinite alternate;
+}
+
+.blob-4 {
   width: 400px;
   height: 400px;
-  background: #3a1025;
-  top: 40%;
-  left: 40%;
-  animation: move3 16s ease-in-out infinite alternate;
+  background: #1a2a4a;
+  bottom: 10%;
+  left: 10%;
+  animation: move4 20s ease-in-out infinite alternate;
 }
 
 @keyframes move1 {
   0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(15vw, 10vh) scale(1.1); }
-  100% { transform: translate(5vw, 25vh) scale(0.95); }
+  50%  { transform: translate(18vw, 12vh) scale(1.1); }
+  100% { transform: translate(6vw, 28vh) scale(0.95); }
 }
 
 @keyframes move2 {
   0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(-20vw, -15vh) scale(1.15); }
-  100% { transform: translate(-8vw, -30vh) scale(0.9); }
+  50%  { transform: translate(-22vw, -18vh) scale(1.15); }
+  100% { transform: translate(-10vw, -32vh) scale(0.9); }
 }
 
 @keyframes move3 {
   0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(-15vw, 10vh) scale(1.2); }
-  100% { transform: translate(10vw, -20vh) scale(0.85); }
+  50%  { transform: translate(-18vw, 12vh) scale(1.2); }
+  100% { transform: translate(12vw, -22vh) scale(0.85); }
+}
+
+@keyframes move4 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(20vw, -15vh) scale(1.1); }
+  100% { transform: translate(8vw, 20vh) scale(1.05); }
 }
 
 /* ── Sparkles ── */
@@ -101,13 +116,14 @@ body {
   animation: sparkleAnim 5s ease-in-out infinite;
 }
 
-.s1 { width: 18px; top: 18%; left: 14%; animation-delay: 0s; }
-.s2 { width: 12px; top: 22%; right: 18%; fill: #7e9ec8; animation-delay: 2s; }
-.s3 { width: 15px; bottom: 28%; left: 22%; fill: #9ec87e; animation-delay: 4s; }
+.s1 { width: 22px; top: 16%; left: 12%; animation-delay: 0s; }
+.s2 { width: 13px; top: 20%; right: 16%; fill: #7e9ec8; animation-delay: 1.8s; }
+.s3 { width: 17px; bottom: 26%; left: 20%; fill: #9ec87e; animation-delay: 3.5s; }
+.s4 { width: 10px; bottom: 20%; right: 22%; fill: var(--accent); animation-delay: 2.5s; }
 
 @keyframes sparkleAnim {
   0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
-  50%       { opacity: 0.7; transform: scale(1) rotate(25deg); }
+  50%       { opacity: 0.65; transform: scale(1) rotate(25deg); }
 }
 
 /* ── Grain ── */
@@ -131,11 +147,11 @@ body::after {
 
 .intro {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 300;
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   color: var(--muted);
-  letter-spacing: 0.02em;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.6rem;
   opacity: 0;
   animation: fadeUp 0.8s ease forwards 0.2s;
 }
@@ -143,14 +159,14 @@ body::after {
 .name {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 800;
-  font-size: clamp(3.5rem, 11vw, 8.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(4rem, 13vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
   color: var(--text);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   overflow: visible;
 }
 
@@ -183,16 +199,15 @@ body::after {
 .tagline {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 300;
-  font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
   color: var(--muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   opacity: 0;
   animation: fadeUp 0.8s ease forwards 1.7s;
 }
 
 .tagline span {
-  color: #a09890;
+  color: #b0a898;
 }
 
 /* ── Animations ── */
