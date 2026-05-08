@@ -5,13 +5,13 @@
 }
 
 :root {
-  --bg: #08080c;
+  --bg: #0a0a10;
   --text: #f5f1ea;
   --muted: #8a8580;
   --accent: #d4b88a;
 }
 
-html, body { height: 100%; }
+html, body { height: 100%; overflow: hidden; }
 
 body {
   background: var(--bg);
@@ -22,57 +22,25 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   position: relative;
 }
 
-/* ── Background ──
-   Solid dark base with a single soft warm gradient pool.
-   Static (no animation) so OLED banding isn't visible. */
-.aurora {
+/* ── Canvas-based gradient (Sean Halpin technique) ──
+   Tiny 32x32 canvas, CSS-scaled to viewport.
+   Browser interpolation = smooth gradient with zero banding. */
+.canvas-wrap {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: var(--bg);
   overflow: hidden;
 }
 
-.layer {
+#bg {
   position: absolute;
-  inset: -20%;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  mix-blend-mode: screen;
-  will-change: transform;
-}
-
-.l1 {
-  background: radial-gradient(circle, #6b4ec8 0%, transparent 60%);
-  animation: drift1 30s ease-in-out infinite alternate;
-}
-
-.l2 {
-  background: radial-gradient(circle, #4a8c6e 0%, transparent 60%);
-  animation: drift2 34s ease-in-out infinite alternate;
-}
-
-.l3 {
-  background: radial-gradient(circle, #b85a7e 0%, transparent 60%);
-  animation: drift3 26s ease-in-out infinite alternate;
-}
-
-@keyframes drift1 {
-  0%   { transform: translate(-15%, -10%) scale(1); }
-  100% { transform: translate(20%, 20%) scale(1.15); }
-}
-@keyframes drift2 {
-  0%   { transform: translate(20%, 15%) scale(1); }
-  100% { transform: translate(-15%, -15%) scale(1.1); }
-}
-@keyframes drift3 {
-  0%   { transform: translate(10%, -10%) scale(1); }
-  100% { transform: translate(-10%, 15%) scale(1.2); }
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: auto;
 }
 
 /* ── Content ── */
@@ -130,7 +98,6 @@ body {
   font-weight: 400;
   font-size: clamp(0.85rem, 1.3vw, 1rem);
   color: var(--muted);
-  letter-spacing: 0;
   opacity: 0;
   animation: fadeUp 0.8s ease forwards 1.4s;
 }
@@ -140,17 +107,14 @@ body {
   font-weight: 700;
 }
 
-/* Mobile */
 @media (max-width: 640px) {
   .name {
     font-size: clamp(2rem, 13vw, 4rem);
     letter-spacing: -0.025em;
   }
   .tagline { font-size: 0.8rem; line-height: 1.5; }
-  .layer { filter: blur(40px); }
 }
 
-/* ── Animations ── */
 @keyframes charIn {
   to { opacity: 1; transform: translateY(0); }
 }
