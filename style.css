@@ -26,67 +26,20 @@ body {
   position: relative;
 }
 
-/* ── Aurora background ──
-   Three large soft conic gradients layered with mix-blend-mode.
-   They move via transform — no banding, no heavy blur. */
+/* ── Background ──
+   Solid dark base with a single soft warm gradient pool.
+   Static (no animation) so OLED banding isn't visible. */
 .aurora {
   position: fixed;
   inset: 0;
-  overflow: hidden;
   z-index: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255,255,255,0.02), transparent),
+    radial-gradient(ellipse 70% 50% at 30% 30%, rgba(120, 90, 200, 0.18), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 75% 70%, rgba(80, 130, 100, 0.12), transparent 70%),
     var(--bg);
 }
 
-.layer {
-  position: absolute;
-  inset: -25%;
-  border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.35;
-  mix-blend-mode: screen;
-  will-change: transform;
-}
-
-.l1 {
-  background: radial-gradient(circle, #1a1448 0%, transparent 55%);
-  animation: drift1 28s ease-in-out infinite alternate;
-}
-
-.l2 {
-  background: radial-gradient(circle, #0a2418 0%, transparent 55%);
-  animation: drift2 32s ease-in-out infinite alternate;
-}
-
-.l3 {
-  background: radial-gradient(circle, #380e22 0%, transparent 55%);
-  animation: drift3 24s ease-in-out infinite alternate;
-}
-
-/* Invisible dithering — kills OLED banding */
-.aurora::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-@keyframes drift1 {
-  0%   { transform: translate(-15%, -10%) scale(1); }
-  100% { transform: translate(20%, 25%) scale(1.15); }
-}
-@keyframes drift2 {
-  0%   { transform: translate(20%, 15%) scale(1); }
-  100% { transform: translate(-15%, -20%) scale(1.1); }
-}
-@keyframes drift3 {
-  0%   { transform: translate(10%, -15%) scale(1); }
-  100% { transform: translate(-10%, 20%) scale(1.2); }
-}
+.layer { display: none; }
 
 /* ── Content ── */
 .container {
