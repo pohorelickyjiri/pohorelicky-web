@@ -4,213 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jiří Pohořelický</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', sans-serif;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Animated dark gradient background */
-    .gradient-bg {
-      position: fixed;
-      inset: 0;
-      background: #0a0a0f;
-      z-index: 0;
-    }
-
-    .gradient-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 20% 50%, #1a1a3e 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 20%, #0f2a1a 0%, transparent 55%),
-                  radial-gradient(ellipse at 60% 80%, #2a1020 0%, transparent 55%);
-      animation: gradientShift 10s ease-in-out infinite alternate;
-    }
-
-    @keyframes gradientShift {
-      0%   { background: radial-gradient(ellipse at 20% 50%, #1a1a3e 0%, transparent 60%),
-                         radial-gradient(ellipse at 80% 20%, #0f2a1a 0%, transparent 55%),
-                         radial-gradient(ellipse at 60% 80%, #2a1020 0%, transparent 55%); }
-      33%  { background: radial-gradient(ellipse at 70% 30%, #1a1a3e 0%, transparent 60%),
-                         radial-gradient(ellipse at 20% 70%, #0f2a1a 0%, transparent 55%),
-                         radial-gradient(ellipse at 80% 60%, #2a1020 0%, transparent 55%); }
-      66%  { background: radial-gradient(ellipse at 40% 80%, #1a1a3e 0%, transparent 60%),
-                         radial-gradient(ellipse at 60% 10%, #0f2a1a 0%, transparent 55%),
-                         radial-gradient(ellipse at 20% 40%, #2a1020 0%, transparent 55%); }
-      100% { background: radial-gradient(ellipse at 80% 50%, #1a1a3e 0%, transparent 60%),
-                         radial-gradient(ellipse at 30% 80%, #0f2a1a 0%, transparent 55%),
-                         radial-gradient(ellipse at 50% 20%, #2a1020 0%, transparent 55%); }
-    }
-
-    /* Sparkles */
-    .sparkle {
-      position: fixed;
-      pointer-events: none;
-      opacity: 0;
-      animation: sparkleAnim 4s ease-in-out infinite;
-    }
-
-    .sparkle svg { fill: currentColor; }
-
-    .sparkle:nth-child(1) { top: 15%; left: 12%; color: #c8a97e; animation-delay: 0s; }
-    .sparkle:nth-child(2) { top: 25%; right: 15%; color: #7e9ec8; animation-delay: 1.5s; }
-    .sparkle:nth-child(3) { bottom: 25%; left: 20%; color: #9ec87e; animation-delay: 3s; }
-    .sparkle:nth-child(4) { bottom: 15%; right: 12%; color: #c8a97e; animation-delay: 0.8s; }
-
-    @keyframes sparkleAnim {
-      0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
-      50%       { opacity: 0.6; transform: scale(1) rotate(20deg); }
-    }
-
-    /* Content */
-    .container {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .intro {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: #6b6560;
-      letter-spacing: 0.02em;
-      margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 0.2s;
-    }
-
-    .name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(3.5rem, 11vw, 8rem);
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-      color: #f0ece4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.1em;
-      margin-bottom: 2rem;
-    }
-
-    .name .line {
-      display: flex;
-      overflow: hidden;
-    }
-
-    .name .char {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(80px) rotate(5deg);
-      animation: charIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .name .char.gold { color: #c8a97e; }
-
-    .divider {
-      width: 40px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #c8a97e, transparent);
-      margin: 0 auto 2rem;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 1.4s;
-    }
-
-    .tagline {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
-      color: #6b6560;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards 1.6s;
-    }
-
-    .tagline span { color: #a09890; }
-
-    @keyframes charIn {
-      to { opacity: 1; transform: translateY(0) rotate(0deg); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Grain */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
-      pointer-events: none;
-      opacity: 0.35;
-      z-index: 2;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="gradient-bg"></div>
+  <!-- Gradient blobs -->
+  <div class="blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
 
   <!-- Sparkles -->
-  <div class="sparkle" style="width:20px;height:20px">
-    <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2l1.5 7.5L21 12l-7.5 1.5L12 21l-1.5-7.5L3 12l7.5-1.5z"/></svg>
-  </div>
-  <div class="sparkle" style="width:14px;height:14px">
-    <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2l1.5 7.5L21 12l-7.5 1.5L12 21l-1.5-7.5L3 12l7.5-1.5z"/></svg>
-  </div>
-  <div class="sparkle" style="width:16px;height:16px">
-    <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2l1.5 7.5L21 12l-7.5 1.5L12 21l-1.5-7.5L3 12l7.5-1.5z"/></svg>
-  </div>
-  <div class="sparkle" style="width:12px;height:12px">
-    <svg viewBox="0 0 24 24" width="12" height="12"><path d="M12 2l1.5 7.5L21 12l-7.5 1.5L12 21l-1.5-7.5L3 12l7.5-1.5z"/></svg>
+  <div class="sparkles" aria-hidden="true">
+    <svg class="sparkle s1" viewBox="0 0 24 24"><path d="M12 2l1.5 7.5L21 12l-7.5 1.5L12 21l-1.5-7.5L3 12l7.5-1.5z"/></svg>
+    <svg class="sparkle s2" viewBox="0 0 24 24"><path d="M12 2l1.5 7.5L21 12l-7.5 1.5L12 21l-1.5-7.5L3 12l7.5-1.5z"/></svg>
+    <svg class="sparkle s3" viewBox="0 0 24 24"><path d="M12 2l1.5 7.5L21 12l-7.5 1.5L12 21l-1.5-7.5L3 12l7.5-1.5z"/></svg>
   </div>
 
-  <div class="container">
-    <div class="intro">Hi. I'm</div>
-    <div class="name" id="name"></div>
+  <!-- Content -->
+  <main class="container">
+    <p class="intro">Hi. I'm</p>
+    <h1 class="name" id="name"></h1>
     <div class="divider"></div>
-    <div class="tagline"><span>Graphic Designer</span> — expanding into code &amp; AI</div>
-  </div>
+    <p class="tagline"><span>Graphic Designer</span> — expanding into code &amp; AI</p>
+  </main>
 
-  <script>
-    const lines = [
-      { text: "Jiří", gold: false },
-      { text: "Pohořelický", gold: true }
-    ];
-
-    const nameEl = document.getElementById('name');
-    let delay = 0.5;
-
-    lines.forEach(line => {
-      const lineEl = document.createElement('div');
-      lineEl.className = 'line';
-
-      [...line.text].forEach(ch => {
-        const span = document.createElement('span');
-        span.className = 'char' + (line.gold ? ' gold' : '');
-        span.textContent = ch;
-        span.style.animationDelay = delay + 's';
-        delay += 0.045;
-        lineEl.appendChild(span);
-      });
-
-      nameEl.appendChild(lineEl);
-      delay += 0.1;
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
