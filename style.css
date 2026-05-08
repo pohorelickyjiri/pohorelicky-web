@@ -22,7 +22,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   position: relative;
 }
 
@@ -157,7 +157,7 @@ body::after {
 }
 
 .name {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
   font-size: clamp(4.5rem, 12vw, 11rem);
   line-height: 0.95;
@@ -173,7 +173,11 @@ body::after {
 .name .line {
   display: block;
   overflow: hidden;
-  line-height: 1.05;
+  line-height: 1.0;
+}
+
+.name .line:first-child {
+  font-size: 1.6em;
 }
 
 .name .char {
