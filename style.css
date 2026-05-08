@@ -33,13 +33,47 @@ body {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 30% 30%, rgba(120, 90, 200, 0.18), transparent 70%),
-    radial-gradient(ellipse 60% 50% at 75% 70%, rgba(80, 130, 100, 0.12), transparent 70%),
-    var(--bg);
+  background: var(--bg);
+  overflow: hidden;
 }
 
-.layer { display: none; }
+.layer {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.l1 {
+  background: radial-gradient(circle, #6b4ec8 0%, transparent 60%);
+  animation: drift1 30s ease-in-out infinite alternate;
+}
+
+.l2 {
+  background: radial-gradient(circle, #4a8c6e 0%, transparent 60%);
+  animation: drift2 34s ease-in-out infinite alternate;
+}
+
+.l3 {
+  background: radial-gradient(circle, #b85a7e 0%, transparent 60%);
+  animation: drift3 26s ease-in-out infinite alternate;
+}
+
+@keyframes drift1 {
+  0%   { transform: translate(-15%, -10%) scale(1); }
+  100% { transform: translate(20%, 20%) scale(1.15); }
+}
+@keyframes drift2 {
+  0%   { transform: translate(20%, 15%) scale(1); }
+  100% { transform: translate(-15%, -15%) scale(1.1); }
+}
+@keyframes drift3 {
+  0%   { transform: translate(10%, -10%) scale(1); }
+  100% { transform: translate(-10%, 15%) scale(1.2); }
+}
 
 /* ── Content ── */
 .container {
@@ -62,19 +96,20 @@ body {
 
 .name {
   font-weight: 800;
-  font-size: clamp(2.5rem, 11vw, 9rem);
-  line-height: 0.95;
+  font-size: clamp(2.5rem, 10vw, 8rem);
+  line-height: 1.15;
   letter-spacing: -0.035em;
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.05em;
+  gap: 0.02em;
 }
 
 .name .line {
   display: block;
-  overflow: hidden;
+  overflow: visible;
+  padding: 0.05em 0;
 }
 
 .name .char {
