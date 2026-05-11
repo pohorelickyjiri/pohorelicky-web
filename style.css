@@ -49,6 +49,7 @@ body {
   z-index: 1;
   text-align: center;
   padding: clamp(1rem, 4vw, 3rem);
+  width: 100%;
   max-width: 95vw;
 }
 
